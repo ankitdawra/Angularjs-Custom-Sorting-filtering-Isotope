@@ -1,0 +1,80 @@
+<div class="usersPage">
+
+	<div class="sub-header">
+		<div class="filters">
+			<span class="sortby">sorty by -</span>
+			
+			<span class="item filterTabsMenu" data-ng-repeat="filter in availFilters" data-ng-click="sortUsers(filter.value)" data-ng-class="{'highlight': selectedFilter == filter.value}">
+				<span data-ng-if="selectedFilter == filter.value">
+					<i data-ng-if="!revOrder" class="fa fa-arrow-up" aria-hidden="true"></i>
+					<i data-ng-if="revOrder" class="fa fa-arrow-down" aria-hidden="true"></i>
+				</span>
+				{{filter.name}}				
+			</span>
+
+			<span class="dropDownMenu-wrap">
+				<select class="filterDropDowmMenu" data-ng-model="selectedFilter" data-ng-change="sortUsers(selectedFilter)">
+					<option ng-repeat="filter in availFilters" value="{{filter.value}}">
+						{{filter.name}}
+					</option>
+				</select>
+				<span class="sortingOrder" data-ng-if="selectedFilter" data-ng-click="sortUsers(selectedFilter)">
+					<i data-ng-if="!revOrder" class="fa fa-arrow-up" aria-hidden="true"></i>
+					<i data-ng-if="revOrder" class="fa fa-arrow-down" aria-hidden="true"></i>
+				</span>
+			</span>
+
+			<span class="dateSelectorWrap" data-ng-click="openDatePickerModal()">
+				<span data-ng-if="!dateIntervalSearched">Pick a date</span>
+				<span data-ng-if="dateIntervalSearched">
+					{{dateIntervalSearched.startDate*1000 | date}} - {{dateIntervalSearched.endDate*1000 | date}}
+				</span>
+			</span>
+		</div>
+	</div>
+
+ 	<div class="remFiltersOptions">
+ 		<span class="reset removeDateFilter" data-ng-if="dateIntervalSearched" data-ng-click="resetFilters(true);"><i class="fa fa-window-close" aria-hidden="true"></i> Clear Date</span>
+		<span class="reset" data-ng-click="resetFilters()">Reset filters</span>
+	</div>
+
+	<div class="mainContent-wrap">
+		<div class="noUsers" data-ng-if="!updatedItems.length">No users avaialble :(</div>
+	    <ul class="grid" masonry="true" data-ng-if="items.length" data-ng-style="{'width':gridContainerWidth}">
+	        <li ng-repeat="user in items | orderBy: order" data-ng-style="{'width':columnWidth}">
+	            	<div class="user">
+			    		<img src="{{user.image}}">
+			    		<span class="name">{{user.fullname}}</span>
+			    		<span class="total">Total Score {{user.twubric.total}}</span>
+			    	</div>
+			    	<div class="stats">
+			    		<div class="stat-item">
+			    			<i class="fa fa-users" aria-hidden="true"></i>
+			    			<span>Friends</span>
+			    			<span class="value">{{user.twubric.friends}}</span>
+			    		</div>
+			    		<div class="stat-item">
+				    		<i class="fa fa-wifi" aria-hidden="true"></i>
+			    			<span>Influence</span>
+			    			<span class="value">{{user.twubric.influence}}</span>
+			    		</div>
+			    		<div class="stat-item">
+			    			<i class="fa fa-volume-up" aria-hidden="true"></i>
+			    			<span>Chirpiness</span>
+			    			<span class="value">{{user.twubric.chirpiness}}</span>
+			    		</div>
+			    	</div>
+			    	<div class="bottom-menu">
+			    		<span class="date">{{user.join_date*1000 | date}}</span>
+			    		<span class="delete" data-ng-click="removeUser($index)"><i class="fa fa-trash fafa-icon-margin"></i></span>
+			    	</div>
+	        </li>
+	    </ul>
+    </div>
+
+    <div data-ng-if="loadingItems" class="mainLoader">
+	        <svg class="circular" viewBox="25 25 50 50">
+	            <circle class="path" cx="50" cy="50" r="20" fill="none" stroke-width="2" stroke-miterlimit="10"/>
+	        </svg>
+    </div>
+</div>

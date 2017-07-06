@@ -1,0 +1,16 @@
+@media(max-width: 768px){
+	.main-container{margin-bottom: 30px;}
+	.usersPage .mainContent-wrap{margin: 100px auto;}
+
+	.usersPage .sub-header .filters .filterTabsMenu{display: none;}
+	.usersPage .sub-header .filters .sortby{display: none;}
+	.usersPage .sub-header .filters .dateSelectorWrap{background: none; padding: 0 10px; color: inherit;}
+
+	.footer .footer-wrap .main .info .extra{display: none;}
+	.footer .footer-wrap .main .logo{display: none;}
+}
+
+
+@media(min-width: 768px){
+	.usersPage .sub-header .filters .dropDownMenu-wrap{display: none;}
+}

@@ -1,0 +1,41 @@
+<div class="calendarModalWrap">
+	<div class="heading">Joined Twitter between</div>
+	<div class="close" data-ng-click="datePickerModal.dismiss()">x</div>
+
+
+	<div class="dropdown form-group dropdown-start-parent">
+	    <label>Start Date</label>
+	    <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown"
+	       href="#">
+	        <div class="input-group date">
+	            <input type="text" class="form-control" data-ng-model="dateRangeStart" disabled>
+	            <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+	        </div>
+	    </a>
+	    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+	        <datetimepicker data-ng-model="dateRangeStart"
+	                        data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed', minView:'day' }"
+	                        data-on-set-time="startDateOnSetTime()"
+	                        data-before-render="startDateBeforeRender($dates)"></datetimepicker>
+	    </ul>
+	</div>
+
+	<div class="dropdown form-group dropdown-end-parent">
+	    <label>End Date</label>
+	    <a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown"
+	       href="#">
+	        <div class="input-group date">
+	            <input type="text" class="form-control" data-ng-model="dateRangeEnd" disabled>
+	            <span class="input-group-addon"><i class="fa fa-calendar" aria-hidden="true"></i></span>
+	        </div>
+	    </a>
+	    <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+			<datetimepicker data-ng-model="dateRangeEnd"
+			                data-datetimepicker-config="{ dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed', minView:'day'}"
+			                data-on-set-time="endDateOnSetTime()"
+			                data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+	    </ul>
+	</div>
+	<div data-ng-if="error" class="error">{{error}}</div>
+	<div class="filterBtn" data-ng-click="filterUsers(dateRangeStart, dateRangeEnd)">Done</div>
+</div>
